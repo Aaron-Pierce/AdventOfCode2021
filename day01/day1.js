@@ -27,7 +27,7 @@
  * 
  * The next biggest bottleneck is submitting your answer
  * I think some people might automate this, I figure
- * you could attach your solution to your clipboard
+ * you could programmatically attach your solution to your clipboard
  * and paste it in. I had to open my terminal, run the program,
  * copy it and paste it into the textbox. This would be a good
  * next step to optimize
