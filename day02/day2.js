@@ -1,5 +1,5 @@
 const fs = require("fs");
-let input = fs.readFileSync("./input.txt").toString();
+let input = fs.readFileSync("./input.txt", { encoding: "utf-8" });
 
 input = input.split("\n");
 
