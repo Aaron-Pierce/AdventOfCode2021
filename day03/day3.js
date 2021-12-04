@@ -36,6 +36,17 @@ function part2() {
   // half of that, you lose three potential strings with the correct
   // bit value in the correct position, so you need to scan
   // until you find the very last one that is valid.
+
+  // I think the time complexity of this one is still nlogn
+  // because you have to do a scan to find the bounds,
+  // but you can never scan more than the list.
+  // you never re-visit any element, once it's gone it's gone,
+  // so you can maximally scan n times.
+  // so at magically worst it's nlogn + n, which is still nlogn
+  // and your scans start from the halfway point, so it's really only maximally nlogn + n/2
+  // so still nlogn. Quite a bit better than the bruteforce
+  // which (for my hasty implementation to get an answer) required linear space and quadratic time.
+  // we can do it in no extra space (just sort in-place) and in nlogn. 
   let sorted = input.sort();
 
   let left = 0;
