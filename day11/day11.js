@@ -31,7 +31,6 @@ function getKey(i, j) {
 function bothParts() {
   let flashes = 0;
 
-  let t = 0;
   for (let t = 0; true; t++) {
     let queue = [];
     let visited = new Set();
