@@ -14,8 +14,10 @@ for(let [cave1, cave2] of input){
 
 
 function part1(){
+  let memo = {};
   function recurse(currCave, visitedSet, pathString){
     if(currCave === "end") return 1;
+    if(memo[currCave] && memo[currCave][Array.from(visitedSet).join("")] !== undefined) return memo[currCave][Array.from(visitedSet).join("")];
 
     let numberOfPaths = 0;
     
@@ -29,13 +31,18 @@ function part1(){
       }
     }
 
+    if(memo[currCave] === undefined) memo[currCave] = {};
+    memo[currCave][Array.from(visitedSet).join("")] = numberOfPaths;
     return numberOfPaths;
   }
 
   let solution = recurse("start", new Set(), "start,")
   console.log(solution);
 }
+
+console.time("Part 1");
 part1();
+console.timeEnd("Part 1");
 
 // maintain a list of visited nodes, as well as a bonus that can be spent
 // if the bonus hasn't been spent, it's null.
@@ -43,11 +50,15 @@ part1();
 // you can 'spend' the bonus, setting it to the cave to denote that you spent it
 // and it allows you to visit that cave once more.
 function part2(){
+  let memo = {};
+  
   function recurse(currCave, visitedSet, bonus, pathString){
     if(currCave === "end"){
-      console.log(pathString);
       return 1;
     };
+
+    if(memo[currCave] && memo[currCave][Array.from(visitedSet).join("")] !== undefined) return memo[currCave][Array.from(visitedSet).join("")];
+    
 
     let numberOfPaths = 0;
     
@@ -67,6 +78,8 @@ function part2(){
     }
 
 
+    if(memo[currCave] === undefined) memo[currCave] = {};
+    memo[currCave][Array.from(visitedSet).join("")] = numberOfPaths;
     return numberOfPaths;
   }
 
@@ -74,4 +87,6 @@ function part2(){
   console.log(solution);
 }
 
+console.time("Part 2");
 part2();
+console.timeEnd("Part 2");
