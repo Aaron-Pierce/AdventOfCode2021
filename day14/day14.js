@@ -125,4 +125,7 @@ function part2(){
 
 }
 
+
+console.time("Part 2 Runtime");
 part2();
+console.timeEnd("Part 2 Runtime");
