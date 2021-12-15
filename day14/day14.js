@@ -59,17 +59,19 @@ part1();
 
 
 function part2(){
+  // A matrix of characters where adjacencyMatrix[a][b] is the number of times
+  // ab appears in the polymer.
   let adjacencyMatrix = {}
-  let elementSet = new Set();
-  for(let char of start.split("")){
-    elementSet.add(char)
-  }
 
+  // a set of all elements so that we know how to make
+  // the adjacency matrix
+  let elementSet = new Set([...start.split("")]);
   for(let rule of productions){
     elementSet.add(...rule[0].split(""));
     elementSet.add(rule[1])
   }
 
+  // init the matrix, all pairs [x][y] set to 0
   for(let char of Array.from(elementSet)){
     adjacencyMatrix[char] = {};
     for(let otherChar of Array.from(elementSet)){
@@ -77,6 +79,7 @@ function part2(){
     }
   }
 
+  // now increment pairs from the start polymer
   for(let i = 0; i < start.length - 1; i++){
     let leftElement = start.charAt(i);
     let rightElement = start.charAt(i + 1);
@@ -85,29 +88,35 @@ function part2(){
   }
 
 
-  const NUM_STEPS = 40;
+  // okay time to do some real work, now
 
+  const NUM_STEPS = 40;
   for(let step = 0; step < NUM_STEPS; step++){
+    // create a copy of the matrix, because each step
+    // happens in parallel
     let matrixCopy = {};
     for(let element in adjacencyMatrix){
       matrixCopy[element] = Object.assign({}, adjacencyMatrix[element]);
     }
 
-    let matrixPatches = [];
-
+    // apply each production rule everywhere we can
     for(let rule of productions){
       let leftChar = rule[0][0];
       let rightChar = rule[0][1];
 
-      let numberOfMatchingPairs = adjacencyMatrix[leftChar][rightChar];
-      matrixCopy[leftChar][rule[1]] += numberOfMatchingPairs;
-      matrixCopy[rule[1]][rightChar] += numberOfMatchingPairs;
-      matrixCopy[leftChar][rightChar] -= numberOfMatchingPairs;
+      // applying a rule ab -> c results in acb, so we need to represent that in the matrix
+      // by removing the ab pair, and inserting ac and cb pairs.
+      let numberOfMatchingPairs = adjacencyMatrix[leftChar][rightChar]; // how many times we apply the production
+      matrixCopy[leftChar][rightChar] -= numberOfMatchingPairs; // we will break up that many pairs
+      matrixCopy[leftChar][rule[1]] += numberOfMatchingPairs; // by inserting some element to the right of the first char
+      matrixCopy[rule[1]][rightChar] += numberOfMatchingPairs; // and therefore to the left of the second char
     }
-    adjacencyMatrix = matrixCopy;
+
+    adjacencyMatrix = matrixCopy; // overwrite the matrix to complete the step
   }
 
 
+  // find the most common and least common elements
   let maxCount = -Infinity;
   let minCount = Infinity;
   for(let element in adjacencyMatrix){
