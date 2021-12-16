@@ -50,6 +50,8 @@ part1();
 
 function part2(){
   let bestPosition = findMinimumUsingCostFunction((targetPosition) => {
+    // the fuel burned here is 1+2+3+4+5... up to the distance
+    // which can be handily computed by distance*(distance+1)/2
     let fuelBurned = 0;
     for(let position of input){
       let linearDistance = Math.abs(targetPosition - position);

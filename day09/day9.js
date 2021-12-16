@@ -40,7 +40,6 @@ function part2() {
     for (let j = 0; j < input[i].length; j++) {
       let key = `${i},${j}`;
       if(!visited.has(key) && input[i][j] !== 9){
-        // console.log("New beginning at ",i,j, input[i][j]);
         let basinSize = 0;
 
         let queue = [[i, j]];
@@ -49,7 +48,6 @@ function part2() {
           let popped = queue.shift();
 
           visited.add(`${popped[0]},${popped[1]}`);
-          // console.log("Visiting ", popped, "with value", input[popped[0]][popped[1]]);
           basinSize++;
           
           let neighborIndicies = [
@@ -71,7 +69,6 @@ function part2() {
 
         }
 
-        console.log("Found basin of size", basinSize);
         basins.push(basinSize);
 
       }
