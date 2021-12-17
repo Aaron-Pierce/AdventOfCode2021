@@ -11,10 +11,10 @@ let inputPacket = input
 
 // from a large string, parses the first packet
 // and returns the remaining part of the string,
-// not part of that packet (useful for side-by-side)
+// not part of that packet (useful for side-by-side
 // subpackets, where you parse the first packet,
 // take what's left over and pass it back into parseFirstPacket,
-// until all that's left is garbage
+// until all that's left is garbage)
 // returns [value, string without the packet we parsed]
 let versionSum = 0;
 function parseFirstPacket(bitArray) {
