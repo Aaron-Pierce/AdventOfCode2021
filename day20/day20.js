@@ -92,11 +92,6 @@ function calculateImageBounds(){
     imageBounds.minJ = Math.min(imageBounds.minJ, point[1]);
     imageBounds.maxJ = Math.max(imageBounds.maxJ, point[1]);
   }
-
-  // imageBounds.minI -= 1;
-  // imageBounds.minJ -= 1;
-  // imageBounds.maxI += 1;
-  // imageBounds.maxJ += 1;
 }
 
 
